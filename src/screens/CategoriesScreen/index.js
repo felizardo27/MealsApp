@@ -6,7 +6,10 @@ export default function CategoriesScreen({ navigation }) {
 
   function renderCategoryItem(itemData) {
     function pressHandler() {
-      navigation.navigate('MealsOverView');
+      navigation.navigate('MealsOverView', {
+        categoryId: itemData.item.id,
+        
+      });
     }
     return (
       <CategoryGridTile
