@@ -4,6 +4,7 @@ import CategoriesScreen from "./src/screens/CategoriesScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import MealsOverViewScreen from "./src/screens/MealsOverViewScreen";
+import DetailsScreen from "./src/screens/DetailsScreen";
 
 const Stack = createStackNavigator();
 
@@ -35,6 +36,13 @@ export default function App() {
             //   const catId = route.params.categoryId;
             //   return { title: catId };
             // }}
+          />
+          <Stack.Screen
+            name="MealsDetails"
+            component={DetailsScreen}
+            options={{
+              title: "Details",
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
