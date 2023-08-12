@@ -34,6 +34,7 @@ export default function MealItem({
             duration={duration}
             complexity={complexity}
             affordability={affordability}
+            textStyle={styles.detailText}
           />
         </View>
       </Pressable>
@@ -70,5 +71,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: "center",
     margin: 8,
-  },
+  }
 });
