@@ -7,6 +7,7 @@ import { StyleSheet } from "react-native";
 import MealDetails from "../../components/MealDetails";
 import Subtitle from "../../components/MealDetail/Subtitle";
 import List from "../../components/MealDetail/List";
+import IconButton from "../../components/IconButton";
 
 export default function DetailsScreen() {
   const { mealId } = useRoute().params;
@@ -20,7 +21,7 @@ export default function DetailsScreen() {
   useLayoutEffect(() => {
     setOptions({
       headerRight: () => {
-        return <Button title="Tap me" onPress={headerButtonPressHandler} />;
+        return <IconButton icon="star" color="#FFF" onPress={headerButtonPressHandler}/>;
       },
     });
   }, [useNavigation(), headerButtonPressHandler]);
