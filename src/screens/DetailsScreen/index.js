@@ -1,5 +1,6 @@
-import { useRoute } from "@react-navigation/native";
-import { Image, Text, ScrollView } from "react-native";
+import { useLayoutEffect } from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { Image, Text, ScrollView, Button } from "react-native";
 import { MEALS } from "../../data/dummy-data";
 import { View } from "react-native";
 import { StyleSheet } from "react-native";
@@ -9,8 +10,20 @@ import List from "../../components/MealDetail/List";
 
 export default function DetailsScreen() {
   const { mealId } = useRoute().params;
-
   const selectMeal = MEALS.find((meal) => meal.id === mealId);
+  const { setOptions } = useNavigation();
+
+  function headerButtonPressHandler() {
+    console.log("press");
+  }
+
+  useLayoutEffect(() => {
+    setOptions({
+      headerRight: () => {
+        return <Button title="Tap me" onPress={headerButtonPressHandler} />;
+      },
+    });
+  }, [useNavigation(), headerButtonPressHandler]);
 
   return (
     <ScrollView style={styles.root}>
@@ -36,7 +49,7 @@ export default function DetailsScreen() {
 
 const styles = StyleSheet.create({
   root: {
-    marginBottom: 32
+    marginBottom: 32,
   },
   image: {
     width: "100%",
@@ -53,9 +66,9 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   listOuterContainer: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   listContainer: {
-    width: '80%'
+    width: "80%",
   },
 });
