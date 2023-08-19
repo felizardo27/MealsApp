@@ -21,7 +21,13 @@ export default function DetailsScreen() {
   useLayoutEffect(() => {
     setOptions({
       headerRight: () => {
-        return <IconButton icon="star" color="#FFF" onPress={headerButtonPressHandler}/>;
+        return (
+          <IconButton
+            icon="star"
+            color="#FFF"
+            onPress={headerButtonPressHandler}
+          />
+        );
       },
     });
   }, [useNavigation(), headerButtonPressHandler]);
