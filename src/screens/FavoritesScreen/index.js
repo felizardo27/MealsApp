@@ -5,9 +5,11 @@ import { MEALS } from "../../data/dummy-data";
 import { StyleSheet } from "react-native";
 import { View } from "react-native";
 import { Text } from "react-native";
+import { useSelector } from "react-redux";
 
 export default function FavoritesScreen() {
-  const { ids } = useContext(FavoritesContext);
+  // const { ids } = useContext(FavoritesContext);
+  const ids = useSelector((state) => state.favoriteMeals.ids);
   const favoritesMeals = MEALS.filter((meal) => ids.includes(meal.id));
 
   if (favoritesMeals.length === 0) {
