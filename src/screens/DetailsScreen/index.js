@@ -1,4 +1,4 @@
-import { useContext, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Image, Text, ScrollView, Button } from "react-native";
 import { MEALS } from "../../data/dummy-data";
@@ -8,21 +8,30 @@ import MealDetails from "../../components/MealDetails";
 import Subtitle from "../../components/MealDetail/Subtitle";
 import List from "../../components/MealDetail/List";
 import IconButton from "../../components/IconButton";
-import { FavoritesContext } from "../../store/context/favorites-context";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, removeFavorite } from "../../store/redux/favorites";
+// import { FavoritesContext } from "../../store/context/favorites-context";
 
 export default function DetailsScreen() {
   const { mealId } = useRoute().params;
   const selectMeal = MEALS.find((meal) => meal.id === mealId);
   const { setOptions } = useNavigation();
 
-  const { ids, addFavorite, removeFavorite } = useContext(FavoritesContext);
-  const mealIdFavorite = ids.includes(mealId);
+  // const { ids, addFavorite, removeFavorite } = useContext(FavoritesContext);
+  // const mealIdFavorite = ids.includes(mealId);
+
+  const favoritesMealIds = useSelector((state) => state.favoriteMeals.ids);
+  const dispatch = useDispatch();
+
+  const mealIdFavorite = favoritesMealIds.includes(mealId);
 
   function changeFavoriteStatusHandler() {
     if (mealIdFavorite) {
-      removeFavorite(mealId);
+      // removeFavorite(mealId);
+      dispatch(removeFavorite({ id: mealId }));
     } else {
-      addFavorite(mealId);
+      // addFavorite(mealId);
+      dispatch(addFavorite({ id: mealId }));
     }
   }
 
@@ -31,7 +40,7 @@ export default function DetailsScreen() {
       headerRight: () => {
         return (
           <IconButton
-            icon={mealIdFavorite ? 'star' : 'star-outline'}
+            icon={mealIdFavorite ? "star" : "star-outline"}
             color="#FFF"
             onPress={changeFavoriteStatusHandler}
           />
